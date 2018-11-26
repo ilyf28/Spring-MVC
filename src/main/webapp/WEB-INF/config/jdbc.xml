@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="jdbc.driverClassName">ENC(zsOr/Zq5J2cmBgGQ9SMSX823eKLvpnfxTfIzE09nnyE=)</entry>
+	<entry key="jdbc.url">ENC(u07zyTE6BT7/QXDVMrNKoxhe7lotmAlJ5MlGydc6QMgluruIrc3eIA==)</entry>
+	<entry key="jdbc.username">ENC(v6D5+9gIAa4LXZc9P/U6Mw==)</entry>
+	<entry key="jdbc.password">ENC(cW7Ii5VrTZxrdRsx9uvZw9Md0P3wNAQa)</entry>
+</properties>
