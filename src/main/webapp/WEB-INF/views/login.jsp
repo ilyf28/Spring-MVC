@@ -6,6 +6,8 @@
 	<meta charset="UTF-8">
 	<title>Login</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/sha256-min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#loginBtn").click(function() {
@@ -13,11 +15,13 @@
 					alert("ID를 입력해주세요.");
 					$("#loginId").focus();
 					return false;
-				} else if ($("#loginPw").val().trim() == "") {
+				} else if ($("#loginPassword").val().trim() == "") {
 					alert("Password를 입력해주세요.");
-					$("#loginPw").focus();
+					$("#loginPassword").focus();
 					return false;
 				} else {
+					var hash = CryptoJS.SHA256($("#loginPassword").val());
+					$("input[name='loginPw']").val(hash);
 					$("#loginForm").submit();
 				}
 			});
@@ -38,7 +42,7 @@
 				<tr>
 					<td>Password</td>
 					<td>
-						<input type="password" name="loginPw" id="loginPw" value="" maxlength="20" />
+						<input type="password" name="loginPassword" id="loginPassword" value="" maxlength="20" />
 					</td>
 				</tr>
 				<tr>
@@ -46,19 +50,20 @@
 						<input type="button" id="loginBtn" value="확인" />
 					</td>
 				</tr>
-				<c:if test="${not empty param.fail}">
-				<tr>
-					<td colspan="2">
-						<font color="red">
-							<span>Your login attempt was not successful, try again.</span>
-							<span>Reason: ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}</span>
-						</font>
-					</td>
-				</tr>
-				<c:remove scope="session" var="SPRING_SECURITY_LAST_EXCEPTION" />
-				</c:if>
 			</table>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<input type="hidden" name="loginPw" value=""/>
 		</form>
+		<c:if test="${not empty error}">
+			<font color="red">
+				<span>${error}</span>
+			</font>
+		</c:if>
+		<c:if test="${not empty message}">
+			<font color="blue">
+				<span>${message}</span>
+			</font>
+		</c:if>
 	</div>
 </body>
 </html>

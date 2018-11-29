@@ -9,4 +9,10 @@
 		FROM tbl_employee
 		LIMIT 1000
 	</select>
+	
+	<select id="selectEmployeeByCode" resultType="hashmap" parameterType="String">
+		SELECT *
+		FROM tbl_employee
+		WHERE EmployeeCode = #{value}
+	</select>
 </mapper>
