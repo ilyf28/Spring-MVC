@@ -1,6 +1,5 @@
 package common.model;
 
-import java.util.Objects;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,12 +24,12 @@ public class DataMap extends ConcurrentHashMap<Object, Object> {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void setValue(String key, int index, Object object) {
 		Vector valueVector = (Vector) get(key);
-		if (Objects.isNull(valueVector)) {
+		if (valueVector == null) {
 			valueVector = new Vector(50, 100);
 			put(key, valueVector);
 			
 			Vector<String> keyVector = (Vector) get("FIELDS");
-			if (Objects.isNull(keyVector)) {
+			if (keyVector == null) {
 				keyVector = new Vector(50, 100);
 				put("FIELDS", keyVector);
 			}
@@ -74,7 +73,7 @@ public class DataMap extends ConcurrentHashMap<Object, Object> {
 	@SuppressWarnings("rawtypes")
 	public Object getValue(String key, int index, Object object) {
 		Vector vector = (Vector) super.get(key);
-		if (Objects.isNull(vector)) return object;
+		if (vector == null) return object;
 		try {
 			return vector.elementAt(index);
 		} catch (ArrayIndexOutOfBoundsException e) {

@@ -1,7 +1,5 @@
 package common.util;
 
-import java.util.Objects;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,14 +12,14 @@ public class AuthenticationUtil {
 	public static Authentication getAuthentication(HttpServletRequest request) {
 		Authentication authentication = (Authentication) request.getAttribute(AUTHENTICATION);
 		
-		if (Objects.isNull(authentication)) {
+		if (authentication == null) {
 			HttpSession session = request.getSession();
 			
-			if (!Objects.isNull(session)) {
+			if (session != null) {
 				authentication = (Authentication) session.getAttribute(AUTHENTICATION);
 			}
 			
-			if (Objects.isNull(authentication)) {
+			if (authentication == null) {
 				authentication = new Authentication();
 			}
 			

@@ -3,7 +3,6 @@ package common.util;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +50,7 @@ public class ParamUtil {
 				String uppercaseKey = null;
 				for (int i = 0, s = listMap.size(); i < s; i++) {
 					map = listMap.get(i);
-					if (!Objects.isNull(map)) {
+					if (map != null) {
 						Set<String> keys = map.keySet();
 						String[] key = new String[keys.size()];
 						keys.toArray(key);
@@ -59,7 +58,7 @@ public class ParamUtil {
 							uppercaseKey = key[j].toUpperCase();
 							Object value = map.get(key[j]);
 							
-							if (Objects.isNull(value)) {
+							if (value == null) {
 								dataMap.setString(uppercaseKey, i, "");
 							} else {
 								if (value instanceof String) {
