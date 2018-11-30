@@ -12,25 +12,27 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import base.employee.mapper.EmployeeMapper;
 
+@Service
 public class LoginService implements UserDetailsService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
 	
 	@Autowired
 	private EmployeeMapper employeeMapper;
 	
-	private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
-
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 		logger.debug("loadUserByUsername username : " + username);
 		Map<String, Object> result = null;
 		try {
 			result = employeeMapper.selectEmployeeByCode(username);
 		} catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
+			logger.error(e.toString());
+			throw new RuntimeException(e.getMessage());
 		}
 		
 		if (result == null) {
