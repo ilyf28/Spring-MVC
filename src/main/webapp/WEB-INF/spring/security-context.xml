@@ -26,9 +26,11 @@
 	</security:http>
 	
 	<security:authentication-manager>
+		<security:authentication-provider ref="loginAuthenticationProvider"/>
 		<security:authentication-provider user-service-ref="loginService"/>
 	</security:authentication-manager>
 	
+	<bean id="loginAuthenticationProvider" class="base.module.provider.LoginAuthenticationProvider"/>
 	<bean id="loginService" class="base.module.service.LoginService"/>
 	
 	<context:component-scan base-package="base.employee.mapper"/>
