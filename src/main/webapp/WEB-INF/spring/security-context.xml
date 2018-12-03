@@ -20,6 +20,8 @@
 			password-parameter="loginPw"
 			login-page="/login"
 			default-target-url="/"
+			authentication-success-handler-ref="loginSuccessHandler"
+			authentication-failure-handler-ref="loginFailureHandler"
 			authentication-failure-url="/login?error" />
 		<security:logout invalidate-session="true" logout-success-url="/login?logout"/>
 		<security:csrf/>
@@ -31,6 +33,10 @@
 	</security:authentication-manager>
 	
 	<bean id="loginAuthenticationProvider" class="base.module.provider.LoginAuthenticationProvider"/>
+	<bean id="loginSuccessHandler" class="base.module.security.LoginSuccessHandler"/>
+	<bean id="loginFailureHandler" class="base.module.security.LoginFailureHandler">
+		<property name="defaultFailureUrl" value="/login?error"/>
+	</bean>
 	<bean id="loginService" class="base.module.service.LoginService"/>
 	
 	<context:component-scan base-package="base.employee.mapper"/>
